@@ -1,0 +1,14 @@
+{
+  "name": "educaro-pathfinder",
+  "version": "1.0.0",
+  "description": "Educaro Pathfinder Monorepo",
+  "scripts": {
+    "setup": "cd backend && npm install && cd ../frontend && npm install",
+    "dev": "npm-run-all --parallel dev:backend dev:frontend",
+    "dev:backend": "cd backend && npm run start:dev",
+    "dev:frontend": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
