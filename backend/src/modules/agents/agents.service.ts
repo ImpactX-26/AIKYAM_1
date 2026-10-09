@@ -104,4 +104,21 @@ export class AgentsService {
 
     return { universities: finalUniversities };
   }
+
+  async analyzeVideo(file: Express.Multer.File): Promise<any> {
+    try {
+      this.logger.log(`Analyzing uploaded video: ${file.originalname}`);
+      const transcript = await this.llmService.generateTranscriptFromVideo(file.path, file.mimetype);
+      
+      // Clean up the temp file
+      const fs = await import('fs/promises');
+      await fs.unlink(file.path).catch(() => {});
+
+      return { transcript };
+    } catch (error: any) {
+      this.logger.error('Error analyzing video', error);
+      const { InternalServerErrorException } = require('@nestjs/common');
+      throw new InternalServerErrorException(error?.message || 'Unknown server error');
+    }
+  }
 }

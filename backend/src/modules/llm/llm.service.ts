@@ -64,6 +64,54 @@ export class LlmService {
     return { type, confidence: 0.9, extractedData: {} };
   }
 
+  async generateTranscriptFromVideo(filePath: string, mimeType: string): Promise<string> {
+    if (this.isMock) {
+      return `[00:00:00] AI Agent: Transcript generated successfully.\n[00:00:02] Applicant: "Hello, my name is [Applicant Name]. I am applying for the Master's program in Computer Science."\n[00:00:08] Applicant: "I have always been passionate about software engineering and I believe German universities offer the best practical approach to this field."\n[00:00:15] Applicant: "I look forward to discussing my application with you. Thank you!"`;
+    }
+
+    try {
+      const { GoogleAIFileManager } = await import('@google/generative-ai/server');
+      const apiKey = this.configService.get<string>('GEMINI_API_KEY');
+      const fileManager = new GoogleAIFileManager(apiKey!);
+
+      const uploadResult = await fileManager.uploadFile(filePath, {
+        mimeType: mimeType,
+        displayName: 'Applicant Video',
+      });
+
+      let file = await fileManager.getFile(uploadResult.file.name);
+      while (file.state === 'PROCESSING') {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        file = await fileManager.getFile(uploadResult.file.name);
+      }
+
+      if (file.state === 'FAILED') {
+        throw new Error('Video processing failed in Gemini API.');
+      }
+
+      const model = this.genAI.getGenerativeModel({ model: this.modelName });
+      const prompt = 'Please generate a detailed transcript for this video. Format it with timestamps in [MM:SS] format and label the speaker as "Applicant:". For example: [00:02] Applicant: "Hello!"';
+      
+      const result = await model.generateContent([
+        {
+          fileData: {
+            mimeType: uploadResult.file.mimeType,
+            fileUri: uploadResult.file.uri
+          }
+        },
+        { text: prompt },
+      ]);
+
+      // Clean up the file from Gemini storage
+      await fileManager.deleteFile(uploadResult.file.name).catch(() => {});
+
+      return result.response.text();
+    } catch (error: any) {
+      this.logger.error('Video transcription failed:', error);
+      throw new Error(`Gemini API Error: ${error?.message || 'Unknown error'}`);
+    }
+  }
+
   private mockGenerateStructured(prompt: string, options?: PromptOptions): any {
     this.logger.debug('MOCK LLM called with prompt:', prompt);
     if (prompt.includes('Intake')) {

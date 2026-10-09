@@ -65,4 +65,13 @@ export class ProfileService {
     }
     return null;
   }
+
+  async updateVideoUrl(email: string, videoUrl: string) {
+    const profile = await this.getMe(email);
+    if (profile) {
+      profile.introduction_video_url = videoUrl;
+      return this.profileRepository.save(profile);
+    }
+    return null;
+  }
 }

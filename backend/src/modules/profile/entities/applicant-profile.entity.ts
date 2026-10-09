@@ -16,6 +16,9 @@ export class ApplicantProfile {
   qualification_status: string;
 
   @Column({ nullable: true })
+  introduction_video_url: string;
+
+  @Column({ nullable: true })
   education: string;
 
   @Column({ type: 'float', nullable: true })

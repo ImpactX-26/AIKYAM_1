@@ -189,6 +189,22 @@ const AdvisorDashboard = () => {
                   </div>
                 )}
                 
+                {profile.introduction_video_url && (
+                  <div className="p-6 bg-slate-100 border-t border-slate-200">
+                    <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider mb-4 flex items-center gap-2">
+                      <svg className="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                      Introduction Video
+                    </h3>
+                    <div className="rounded-xl overflow-hidden bg-black shadow-md border border-slate-300 max-w-md">
+                      <video 
+                        src={`http://localhost:3000${profile.introduction_video_url}`} 
+                        controls 
+                        className="w-full h-auto max-h-[250px] object-contain"
+                      />
+                    </div>
+                  </div>
+                )}
+                
                 {/* Advisor Actions */}
                 <div className="p-6 bg-slate-50 border-t border-slate-100 flex justify-end">
                   {profile.completeness_score === 80 ? (
