@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -26,7 +26,7 @@ const UniversityRequirements = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans pb-20">
-      
+
       {/* Top Navigation */}
       <nav className="bg-blue-900 shadow-lg border-b border-blue-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,16 +51,16 @@ const UniversityRequirements = () => {
       </div>
 
       <div className="-mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Search Bar */}
         <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 mb-8 border border-slate-100 flex gap-4">
           <div className="relative flex-1">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg className="h-6 w-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
-            <input 
-              type="text" 
-              placeholder="Search for a university..." 
+            <input
+              type="text"
+              placeholder="Search for a university..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-0 text-lg transition-colors outline-none"
@@ -70,8 +70,8 @@ const UniversityRequirements = () => {
 
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20">
-             <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4"></div>
-             <p className="text-slate-500 font-semibold text-lg">Fetching 300+ Universities...</p>
+            <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4"></div>
+            <p className="text-slate-500 font-semibold text-lg">Fetching 300+ Universities...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -79,7 +79,7 @@ const UniversityRequirements = () => {
               <div key={idx} className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-all group flex flex-col">
                 <div className="p-6 bg-gradient-to-br from-slate-50 to-white flex-1">
                   <h2 className="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors mb-4">{uni.name}</h2>
-                  
+
                   <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Popular Courses Offered:</h3>
                   <ul className="space-y-2 mb-6">
                     {uni.courses.map((course, cIdx) => (
@@ -90,7 +90,7 @@ const UniversityRequirements = () => {
                     ))}
                   </ul>
                 </div>
-                
+
                 {uni.website && (
                   <div className="px-6 py-4 bg-slate-50 border-t border-slate-100">
                     <a href={uni.website} target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-800 font-bold text-sm flex items-center gap-1 w-max">
