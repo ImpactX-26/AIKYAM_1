@@ -9,6 +9,7 @@ import UniversityRequirements from './pages/UniversityRequirements';
 import AdvisorDashboard from './pages/AdvisorDashboard';
 import CVAgent from './pages/CVAgent';
 import VisaGuide from './pages/VisaGuide';
+import MediaCenter from './pages/MediaCenter';
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/advisor-dashboard" element={<AdvisorDashboard />} />
           <Route path="/cv-builder" element={<CVAgent />} />
           <Route path="/visa-guide" element={<VisaGuide />} />
+          <Route path="/media" element={<MediaCenter />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

@@ -176,6 +176,7 @@ const Dashboard = () => {
               </h2>
               <ul className="space-y-3 text-sm text-slate-300">
                 <li><Link to="/requirements" className="hover:text-white hover:underline flex items-center justify-between group">University Requirements <span className="text-slate-500 group-hover:text-blue-400 transition-colors">→</span></Link></li>
+                <li><Link to="/media" className="hover:text-white hover:underline flex items-center justify-between group text-purple-300 font-bold">Media Folder (Intro Video) <span className="text-slate-500 group-hover:text-blue-400 transition-colors">→</span></Link></li>
                 <li><Link to="/cv-builder" className="hover:text-white hover:underline flex items-center justify-between group text-blue-300 font-bold">AI CV Builder (Lebenslauf) <span className="text-slate-500 group-hover:text-blue-400 transition-colors">→</span></Link></li>
                 <li><Link to="/visa-guide" className="hover:text-white hover:underline flex items-center justify-between group text-green-300 font-bold">Visa Process Guide <span className="text-slate-500 group-hover:text-blue-400 transition-colors">→</span></Link></li>
                 <li><button onClick={() => setShowSupportModal(true)} className="hover:text-white hover:underline flex items-center justify-between group w-full text-left">Contact Support <span className="text-slate-500 group-hover:text-blue-400 transition-colors">→</span></button></li>
